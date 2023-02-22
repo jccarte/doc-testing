@@ -1,0 +1,98 @@
+= Objects
+* <<reference-calendly-cloud-resources-schema,`Calendly Cloud Resources Schema`>> (root object)
+
+
+'''
+[#reference-calendly-cloud-resources-schema]
+== Calendly Cloud Resources Schema
+
+.`Calendly Cloud Resources Schema` Properties
+|===
+|   |Type|Description|Required
+
+|**serviceName**
+|`string`
+|
+| &#10003; Yes
+
+|**envDefaults**
+|`object`
+|
+|No, default: `{}`
+
+|**buckets**
+|`object` `[]`
+|
+|No, default: `{}`
+
+|**postgresql**
+|`object` `[]`
+|
+|No, default: `[]`
+
+|**topics**
+|`object` `[]`
+|
+|No, default: `{}`
+
+|**subscriptions**
+|`object` `[]`
+|
+|No, default: `{}`
+
+|**redis**
+|`object` `[]`
+|
+|No, default: `{}`
+
+|===
+
+Additional properties are allowed.
+
+=== Calendly Cloud Resources Schema.serviceName
+
+* **Type**: `string`
+* **Required**:  &#10003; Yes
+
+=== Calendly Cloud Resources Schema.envDefaults
+
+* **Type**: `object`
+* **Required**: No, default: `{}`
+
+=== Calendly Cloud Resources Schema.buckets
+
+* **Type**: `object` `[]`
+* **Required**: No, default: `{}`
+* **Examples**:
+** `{"infra-config-bucket": {  "name": "infra-config-bucket",  "cors": [   {    "origin": [     "http://example.appspot.com"    ],    "responseHeader": [     "Content-Type"    ],    "method": [     "GET",     "HEAD",     "DELETE"    ],    "maxAgeSeconds": 3600   }  ],  "kmsKey": "projects/my-pet-project/locations/us-east1/keyRings/my-key-ring/cryptoKeys/my-key",  "lifecycleRule": [   {    "action": {     "type": "Delete"    },    "condition": {     "age": 7    }   }  ],  "location": "us",  "logBucket": "my-log-bucket",  "gcp": {   "storageClass": "coldline"  },  "versioning": true }}`
+
+=== Calendly Cloud Resources Schema.postgresql
+
+* **Type**: `object` `[]`
+* **Required**: No, default: `[]`
+* **Examples**:
+** `{"enabled": false, "pg_version": 14, "plan": "startup-4", "tags": {}}`
+
+=== Calendly Cloud Resources Schema.topics
+
+* **Type**: `object` `[]`
+* **Required**: No, default: `{}`
+* **Examples**:
+** `{"infra-topic": {  "name": "infra-topic" }}`
+
+=== Calendly Cloud Resources Schema.subscriptions
+
+* **Type**: `object` `[]`
+* **Required**: No, default: `{}`
+* **Examples**:
+** `{"mySubscription": {  "topicName": "mytopic",  "deadletter": {   "enabled": true  } }}`
+
+=== Calendly Cloud Resources Schema.redis
+
+* **Type**: `object` `[]`
+* **Required**: No, default: `{}`
+
+
+== Examples
+
+* `{"gcp": {  "serviceAccount": {   "create": true,   "annotations": {}  },  "projectId": "staging-1234",  "projectNumber": 700604769710 }, "bucketDefaults": {  "versioning": true }, "buckets": {  "component-bucket": {   "name": "infra-config-bucket",   "versioning": true  } }, "postgresDefaults": {  "aivenProject": "calendly-staging",  "cloudName": "google-us-east4",  "maintenanceWindowDow": "friday",  "maintenanceWindowTime": 82800,  "pg_version": 14,  "plan": "startup-4",  "projectVpcId": "asdfasdf",  "terminationProtection": true }, "postgresql": {  "enabled": false,  "pg_version": 14,  "plan": "startup-4",  "tags": {} }, "topics": {  "infra-topic": {   "name": "infra-topic"  } }, "subscriptions": {  "mySubscription": {   "topicName": "mytopic",   "deadletter": {    "enabled": true   }  } }}`
